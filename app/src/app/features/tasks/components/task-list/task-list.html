@@ -1,0 +1,25 @@
+<section class="task-list">
+  <h2>Tasks</h2>
+
+  @if (tasks$ | async; as tasks) {
+    @if (tasks.length === 0) {
+      <p>Nenhuma tarefa cadastrada.</p>
+    } @else {
+      <ul>
+        @for (task of tasks; track task.id) {
+          <li>
+            <label>
+              <input type="checkbox" [checked]="task.completed" (change)="toggleTask(task.id)" />
+
+              <span [class.completed]="task.completed">
+                {{ task.title }}
+              </span>
+            </label>
+
+            <button type="button" (click)="removeTask(task.id)">Remover</button>
+          </li>
+        }
+      </ul>
+    }
+  }
+</section>
